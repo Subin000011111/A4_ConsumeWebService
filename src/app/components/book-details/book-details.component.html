@@ -1,1 +1,15 @@
-<p>book-details works!</p>
+<div class="container mt-4" *ngIf="book">
+    <h2>Book Details</h2>
+    <ul class="list-group">
+      <li class="list-group-item"><strong>ID:</strong> {{ book.id }}</li>
+      <li class="list-group-item"><strong>Title:</strong> {{ book.title }}</li>
+      <li class="list-group-item"><strong>Author:</strong> {{ book.authorName }}</li>
+      <li class="list-group-item"><strong>Price:</strong> \${{ book.price }}</li>
+      <li class="list-group-item"><strong>Quantity:</strong> {{ book.quantity }}</li>
+    </ul>
+  </div>
+  
+  <div *ngIf="!book">
+    <p class="text-danger">Book not found or loading...</p>
+  </div>
+  
