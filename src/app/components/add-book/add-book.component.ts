@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book';
 
@@ -16,17 +15,27 @@ export class AddBookComponent {
     title: '',
     authorName: '',
     price: 0,
-    quantity: 1
+    quantity: 0
   };
 
-  constructor(private bookService: BookService, private router: Router) {}
+  message: string = '';
 
-  onSubmit(): void {
-    this.bookService.createBook(this.book).subscribe(() => {
-      console.log('Book created successfully!');
-      this.router.navigate(['/books']); // redirect to list
-    }, error => {
-      console.error('Error creating book:', error);
+  constructor(private bookService: BookService) {}
+
+  addBook(): void {
+    if (!this.book.title || !this.book.authorName) {
+      this.message = 'Please fill all required fields.';
+      return;
+    }
+
+    this.bookService.createBook(this.book).subscribe({
+      next: () => {
+        this.message = 'Book added successfully!';
+        this.book = { title: '', authorName: '', price: 0, quantity: 0 };
+      },
+      error: () => {
+        this.message = 'Failed to add book.';
+      }
     });
   }
 }
