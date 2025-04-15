@@ -1,4 +1,4 @@
-import { RouterModule } from '@angular/router';
+<h2>Book List</h2>
 <table class="table table-bordered table-striped">
   <thead class="table-dark">
     <tr>
@@ -19,13 +19,8 @@ import { RouterModule } from '@angular/router';
       <td>{{ book.quantity }}</td>
       <td>
         <a [routerLink]="['/edit', book.id]" class="btn btn-sm btn-warning me-2">Edit</a>
-        <button 
-          (click)="book.id && deleteBook(book.id)" 
-          class="btn btn-sm btn-danger">
-          Delete
-        </button>
+        <button (click)="deleteBook(book.id!)" class="btn btn-sm btn-danger">Delete</button>
       </td>
     </tr>
   </tbody>
 </table>
-
