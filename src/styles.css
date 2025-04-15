@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 30px;
+    color: #333;
+  }
+  
+  h2, h1 {
+    color: #2c3e50;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 8px;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  nav a {
+    font-weight: bold;
+    margin-right: 15px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  td:last-child {
+    text-align: center;
+  }
+  
+  button {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: #c82333;
+  }
+  

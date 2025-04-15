@@ -22,7 +22,7 @@ export class EditBookComponent {
       return;
     }
 
-    this.bookService.getBookById(this.id).subscribe({
+    this.bookService.getBook(this.id).subscribe({
       next: (data) => {
         this.book = data;
         this.message = '';
@@ -37,7 +37,7 @@ export class EditBookComponent {
   updateBook() {
     if (!this.book) return;
 
-    this.bookService.updateBook(this.book).subscribe({
+    this.bookService.updateBook(this.id, this.book).subscribe({
       next: () => {
         this.message = `Book with ID ${this.id} has been updated.`;
       },

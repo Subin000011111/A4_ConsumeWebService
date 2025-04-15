@@ -7,4 +7,6 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   templateUrl: './app.component.html'
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'A4_ConsumeWebService';
+}
