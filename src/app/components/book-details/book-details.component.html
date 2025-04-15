@@ -1,24 +1,15 @@
-<h2>Book List</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books">
-      <td>{{ book.title }}</td>
-      <td>{{ book.authorName }}</td>
-      <td>{{ book.price }}</td>
-      <td>{{ book.quantity }}</td>
-      <td>
-        <a [routerLink]="['/edit', book.id]">Edit</a> |
-        <button (click)="deleteBook(book.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container mt-4" *ngIf="book">
+  <h2>Book Details</h2>
+  <ul class="list-group">
+    <li class="list-group-item"><strong>ID:</strong> {{ book.id }}</li>
+    <li class="list-group-item"><strong>Title:</strong> {{ book.title }}</li>
+    <li class="list-group-item"><strong>Author:</strong> {{ book.authorName }}</li>
+    <li class="list-group-item"><strong>Price:</strong> ${{ book.price }}</li>
+    <li class="list-group-item"><strong>Quantity:</strong> {{ book.quantity }}</li>
+  </ul>
+  <button class="btn btn-secondary mt-3" (click)="goBack()">Back to List</button>
+</div>
+
+<div class="container mt-4" *ngIf="!book">
+  <p>Loading book details...</p>
+</div>
