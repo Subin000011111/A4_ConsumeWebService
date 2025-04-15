@@ -1,10 +1,6 @@
-<div class="container mt-4">
-  <h2>Book Management System</h2>
-  
-  <nav class="mb-4">
-    <a routerLink="/books" routerLinkActive="active" class="btn btn-primary me-2">Book List</a>
-    <a routerLink="/add-book" routerLinkActive="active" class="btn btn-success">Add Book</a>
-  </nav>
-
-  <router-outlet></router-outlet>
-</div>
+<h2>Book Management System</h2>
+<nav>
+  <a routerLink="/books" routerLinkActive="active">Book List</a> |
+  <a routerLink="/add" routerLinkActive="active">Add Book</a>
+</nav>
+<router-outlet></router-outlet>
