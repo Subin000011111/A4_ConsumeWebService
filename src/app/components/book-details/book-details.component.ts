@@ -12,12 +12,12 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class BookDetailsComponent implements OnInit {
-  book: Book | null = null;
+  book: Book | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private bookService: BookService,
-    private router: Router
+    private router: Router,
+    private bookService: BookService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +27,11 @@ export class BookDetailsComponent implements OnInit {
     });
   }
 
-  goBack(): void {
-    this.router.navigate(['/books']);
+  deleteBook(): void {
+    if (this.book?.id && confirm('Are you sure you want to delete this book?')) {
+      this.bookService.deleteBook(this.book.id).subscribe(() => {
+        this.router.navigate(['/books']);
+      });
+    }
   }
 }
