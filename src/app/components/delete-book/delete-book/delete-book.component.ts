@@ -1,28 +1,34 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../../../services/book.service';
 
-
 @Component({
   selector: 'app-delete-book',
+  templateUrl: './delete-book.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './delete-book.component.html'
+  imports: [CommonModule, FormsModule]
 })
 export class DeleteBookComponent {
   bookId: number | undefined;
+  message: string = '';
 
-  bookService = inject(BookService);  // ✅ Correct DI using inject()
+  constructor(private bookService: BookService) {}
 
   deleteBook(): void {
-    if (this.bookId !== undefined && !isNaN(this.bookId)) {
-      this.bookService.deleteBook(this.bookId).subscribe(() => {
-        alert(`Book with ID ${this.bookId} deleted successfully.`);
-        this.bookId = undefined;
-      });
-    } else {
-      alert('Please enter a valid Book ID.');
+    if (!this.bookId) {
+      this.message = 'Please enter a valid ID.';
+      return;
     }
+
+    this.bookService.deleteBook(this.bookId).subscribe({
+      next: () => {
+        this.message = `Book with ID ${this.bookId} has been deleted.`;
+        this.bookId = undefined;
+      },
+      error: () => {
+        this.message = `Book with ID ${this.bookId} could not be found.`;
+      }
+    });
   }
 }

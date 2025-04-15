@@ -1,6 +1,11 @@
-<h2>Delete Book</h2>
-<form (ngSubmit)="deleteBook()">
-  <label for="bookId">Enter Book ID to delete:</label>
-  <input type="number" [(ngModel)]="bookId" name="bookId" required>
-  <button type="submit">Delete</button>
-</form>
+<div class="container mt-4">
+    <h3>Delete Book</h3>
+    <div class="form-group">
+      <label for="id">Enter Book ID to Delete:</label>
+      <input type="number" [(ngModel)]="bookId" class="form-control" placeholder="Book ID" />
+    </div>
+    <button class="btn btn-danger mt-2" (click)="deleteBook()">Delete</button>
+  
+    <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
+  </div>
+  
