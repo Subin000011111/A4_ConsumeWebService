@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../../../services/book.service';
+
 
 @Component({
   selector: 'app-delete-book',
@@ -12,10 +13,10 @@ import { BookService } from '../../../services/book.service';
 export class DeleteBookComponent {
   bookId: number | undefined;
 
-  constructor(private bookService: BookService) {}
+  bookService = inject(BookService);  // ✅ Correct DI using inject()
 
-  deleteBook() {
-    if (this.bookId) {
+  deleteBook(): void {
+    if (this.bookId !== undefined && !isNaN(this.bookId)) {
       this.bookService.deleteBook(this.bookId).subscribe(() => {
         alert(`Book with ID ${this.bookId} deleted successfully.`);
         this.bookId = undefined;
