@@ -7,7 +7,7 @@
       <th>Author</th>
       <th>Price</th>
       <th>Quantity</th>
-      <th>Actions</th>
+    
     </tr>
   </thead>
   <tbody>
@@ -17,9 +17,6 @@
       <td>{{ book.author }}</td>
       <td>{{ book.price }}</td>
       <td>{{ book.quantity }}</td>
-      <td>
-        <a [routerLink]="['/edit', book.id]" class="btn btn-sm btn-warning me-2">Edit</a>
-      </td>
     </tr>
   </tbody>
 </table>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book';
+import { BookService } from '../../services/book.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-book',
@@ -22,19 +22,20 @@ export class AddBookComponent {
 
   constructor(private bookService: BookService) {}
 
-  addBook(): void {
-    if  (!this.book.title || !this.book.author)     {
-      this.message = 'Please fill all required fields.';
+  addBook() {
+    if (!this.book.title || !this.book.author) {
+      this.message = 'Please fill all required fields';
       return;
     }
-
-    this.bookService.createBook(this.book).subscribe({
+  
+    this.bookService.addBook(this.book).subscribe({
       next: () => {
-        this.message = 'Book added successfully!';
+        this.message = 'Book added successfully';
         this.book = { title: '', author: '', price: 0, quantity: 0 };
       },
-      error: () => {
-        this.message = 'Failed to add book.';
+      error: (err) => {
+        console.error(err);
+        this.message = 'Error adding book';
       }
     });
   }
