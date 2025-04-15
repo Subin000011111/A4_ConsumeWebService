@@ -1,43 +1,49 @@
 import { Component } from '@angular/core';
-import { BookService } from '../../services/book.service';
-import { Book } from '../../models/book';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; 
+import { BookService } from '../../services/book.service'; 
 
 @Component({
   selector: 'app-edit-book',
-  templateUrl: './edit-book.component.html',
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, FormsModule], 
+  templateUrl: './edit-book.component.html'
 })
 export class EditBookComponent {
-  id?: number;
-  book?: Book;
-  message = '';
+  id!: number;
+  book: any = undefined;
+  message: string = '';
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(private bookService: BookService) {}
 
   fetchBook() {
     if (!this.id) {
-      this.message = 'Please enter a valid ID.';
+      this.message = 'Please enter a valid Book ID.';
       return;
     }
 
-    this.bookService.getBook(this.id).subscribe({
+    this.bookService.getBookById(this.id).subscribe({
       next: (data) => {
         this.book = data;
         this.message = '';
       },
       error: () => {
-        this.message = 'Book not found!';
+        this.message = `Book with ID ${this.id} not found.`;
+        this.book = undefined;
       }
     });
   }
 
   updateBook() {
-    if (this.book && this.id) {
-      this.bookService.updateBook(this.id, this.book).subscribe(() => {
-        this.message = 'Book updated successfully.';
-        setTimeout(() => this.router.navigate(['/book-list']), 1500);
-      });
-    }
+    if (!this.book) return;
+
+    this.bookService.updateBook(this.book).subscribe({
+      next: () => {
+        this.message = `Book with ID ${this.id} has been updated.`;
+      },
+      error: () => {
+        this.message = `Failed to update book with ID ${this.id}.`;
+      }
+    });
   }
 }
