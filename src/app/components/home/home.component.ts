@@ -8,7 +8,6 @@ import { BookService } from '../../services/book.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './home.component.html',
-  providers: [BookService]
 })
 export class HomeComponent {
   constructor(private bookService: BookService, private router: Router) {}
