@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookService } from '../../services/book.service';
 import { FormsModule } from '@angular/forms';
+import { BookService } from '../../services/book.service'; 
 
 @Component({
   selector: 'app-delete-book',
@@ -21,7 +21,7 @@ export class DeleteBookComponent {
         this.bookId = undefined;
       });
     } else {
-      alert("Please enter a valid Book ID.");
+      alert('Please enter a valid Book ID.');
     }
   }
 }
