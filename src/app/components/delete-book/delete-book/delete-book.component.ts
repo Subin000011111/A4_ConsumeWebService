@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BookService } from '../../services/book.service'; 
+import { BookService } from '../../../services/book.service';
 
 @Component({
   selector: 'app-delete-book',
