@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-book',
@@ -18,13 +18,13 @@ export class EditBookComponent implements OnInit {
     title: '',
     authorName: '',
     price: 0,
-    quantity: 0
+    quantity: 1
   };
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private bookService: BookService
+    private bookService: BookService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class EditBookComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.bookService.updateBook(this.book.id, this.book).subscribe(() => {
+    this.bookService.updateBook(this.book.id!, this.book).subscribe(() => {
       this.router.navigate(['/books']);
     });
   }
