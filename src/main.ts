@@ -1,14 +1,14 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { provideHttpClient } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { routes } from './app/app.routes';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(),
     provideRouter(routes),
-    provideAnimations()
+    importProvidersFrom(HttpClientModule, FormsModule)
   ]
-}).catch(err => console.error(err));
+});
