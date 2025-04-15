@@ -13,7 +13,7 @@ import { Book } from '../../models/book';
 export class AddBookComponent {
   book: Book = {
     title: '',
-    authorName: '',
+    author: '',
     price: 0,
     quantity: 0
   };
@@ -23,7 +23,7 @@ export class AddBookComponent {
   constructor(private bookService: BookService) {}
 
   addBook(): void {
-    if (!this.book.title || !this.book.authorName) {
+    if  (!this.book.title || !this.book.author)     {
       this.message = 'Please fill all required fields.';
       return;
     }
@@ -31,7 +31,7 @@ export class AddBookComponent {
     this.bookService.createBook(this.book).subscribe({
       next: () => {
         this.message = 'Book added successfully!';
-        this.book = { title: '', authorName: '', price: 0, quantity: 0 };
+        this.book = { title: '', author: '', price: 0, quantity: 0 };
       },
       error: () => {
         this.message = 'Failed to add book.';

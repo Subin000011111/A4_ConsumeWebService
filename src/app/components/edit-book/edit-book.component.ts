@@ -1,49 +1,47 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; 
-import { BookService } from '../../services/book.service'; 
+import { FormsModule } from '@angular/forms';
+import { Book } from '../../models/book';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-edit-book',
   standalone: true,
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule],
   templateUrl: './edit-book.component.html'
 })
 export class EditBookComponent {
-  id!: number;
-  book: any = undefined;
-  message: string = '';
+  bookId: number | null = null;
+  book: Book | null = null;
+  message = '';
 
   constructor(private bookService: BookService) {}
 
   fetchBook() {
-    if (!this.id) {
-      this.message = 'Please enter a valid Book ID.';
-      return;
+    if (this.bookId != null) {
+      this.bookService.getBookById(this.bookId).subscribe({
+        next: (data: Book) => {
+          this.book = data;
+          this.message = '';
+        },
+        error: () => {
+          this.message = 'Book not found';
+          this.book = null;
+        }
+      });
     }
-
-    this.bookService.getBook(this.id).subscribe({
-      next: (data) => {
-        this.book = data;
-        this.message = '';
-      },
-      error: () => {
-        this.message = `Book with ID ${this.id} not found.`;
-        this.book = undefined;
-      }
-    });
   }
 
   updateBook() {
-    if (!this.book) return;
-
-    this.bookService.updateBook(this.id, this.book).subscribe({
-      next: () => {
-        this.message = `Book with ID ${this.id} has been updated.`;
-      },
-      error: () => {
-        this.message = `Failed to update book with ID ${this.id}.`;
-      }
-    });
+    if (this.book) {
+      this.bookService.updateBook(this.book.id!, this.book).subscribe({
+        next: () => {
+          this.message = 'Book updated successfully';
+        },
+        error: () => {
+          this.message = 'Error updating book';
+        }
+      });
+    }
   }
 }

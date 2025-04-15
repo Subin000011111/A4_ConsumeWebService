@@ -1,35 +1,28 @@
-<div class="container mt-4">
-  <h3>Edit Book</h3>
+<h3>Edit Book</h3>
+<div>
+  <label for="bookId">Enter Book ID:</label>
+  <input type="number" [(ngModel)]="bookId" />
+  <button (click)="fetchBook()">Fetch Book</button>
+</div>
 
-  <div class="form-group">
-    <label for="id">Enter Book ID:</label>
-    <input type="number" [(ngModel)]="id" class="form-control" placeholder="Book ID" />
-    <button class="btn btn-primary mt-2" (click)="fetchBook()">Fetch Book</button>
-  </div>
+<div *ngIf="book">
+  <form (ngSubmit)="updateBook()">
+    <label>Title:</label>
+    <input [(ngModel)]="book.title" name="title" required /><br>
 
-  <div *ngIf="book">
-    <div class="form-group mt-3">
-      <label>Title</label>
-      <input [(ngModel)]="book.title" class="form-control" />
-    </div>
+    <label>Author:</label>
+    <input [(ngModel)]="book.author" name="author" required /><br>
 
-    <div class="form-group">
-      <label>Author Name</label>
-      <input [(ngModel)]="book.authorName" class="form-control" />
-    </div>
+    <label>Price:</label>
+    <input [(ngModel)]="book.price" name="price" type="number" required /><br>
 
-    <div class="form-group">
-      <label>Price</label>
-      <input type="number" [(ngModel)]="book.price" class="form-control" />
-    </div>
+    <label>Quantity:</label>
+    <input [(ngModel)]="book.quantity" name="quantity" type="number" required /><br>
 
-    <div class="form-group">
-      <label>Quantity</label>
-      <input type="number" [(ngModel)]="book.quantity" class="form-control" />
-    </div>
+    <button type="submit">Update</button>
+  </form>
+</div>
 
-    <button class="btn btn-success mt-3" (click)="updateBook()">Update Book</button>
-  </div>
-
-  <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
+<div *ngIf="message">
+  {{ message }}
 </div>

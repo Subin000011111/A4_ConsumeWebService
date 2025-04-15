@@ -10,7 +10,8 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'books', component: BookListComponent },
   { path: 'add', component: AddBookComponent },
-  { path: 'edit/:id', component: EditBookComponent },
+  { path: 'edit', component: EditBookComponent },
   { path: 'delete', component: DeleteBookComponent }
+
   
 ];
